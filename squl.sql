@@ -1,7 +1,7 @@
 
 //moives
 
- 
+
 CREATE TABLE movies (
     id INTERGER PRIMARY KEY,
     name DEFAULT TEXT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE roles (
 );
 
 
-SELECT name 
+SELECT name
     from movies
     where year = 1985;
 
@@ -35,7 +35,7 @@ SELECT *
     from actors
     where last_name LIKE "%stack%";
 
-SELECT 
+SELECT
     first_name,
     COUNT(*) AS firstNameCount
     from actors
@@ -43,7 +43,7 @@ SELECT
     ORDER BY firstNameCount DESC
     LIMIT 30;
 
-SELECT 
+SELECT
     id,
     (first_name || ' ' || last_name) AS fullname,
     COUNT(*) AS nameCount
@@ -52,10 +52,8 @@ SELECT
     ORDER BY nameCount DESC
     LIMIT 10;
 
-SELECT 
-
 SELECT
-    first_name, 
+    first_name,
     last_name,
     COUNT (*) AS roleCount
 FROM actors
@@ -63,4 +61,12 @@ LEFT JOIN roles ON roles.actor_id = actors.id
 GROUP BY (first_name || " " || last_name)
 ORDER BY roleCount DESC
 LIMIT 100;
-             
+
+SELECT
+  genre,
+  COUNT (*) AS genreCount
+FROM movies_genres
+LEFT JOIN movies ON movies.id = movies_genres.movie_id
+GROUP BY movies_genres.genre
+ORDER BY genreCount
+LIMIT 25;
